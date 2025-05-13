@@ -1,0 +1,8 @@
+body {
+  background-color: rgb(238, 238, 238);
+}
+
+.card-img-ratio {
+  aspect-ratio: 2 / 3;
+  overflow: cover;
+}
