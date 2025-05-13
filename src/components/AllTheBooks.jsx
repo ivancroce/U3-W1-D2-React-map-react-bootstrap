@@ -48,7 +48,26 @@ class AllTheBooks extends Component {
 
     return (
       <Container>
-        {/* category dropdown */}
+        {/* Buttons to select categories */}
+        <div className="my-4 d-flex flex-wrap gap-2 justify-content-center">
+          <Button variant="info" onClick={() => this.setState({ books: scifi })}>
+            Sci-Fi
+          </Button>
+          <Button variant="danger" onClick={() => this.setState({ books: romance })}>
+            Romance
+          </Button>
+          <Button variant="dark" onClick={() => this.setState({ books: horror })}>
+            Horror
+          </Button>
+          <Button variant="warning" onClick={() => this.setState({ books: history })}>
+            History
+          </Button>
+          <Button variant="success" onClick={() => this.setState({ books: fantasy })}>
+            Fantasy
+          </Button>
+        </div>
+
+        {/* or dropdown to select categeories */}
         <Dropdown onSelect={this.handleCategoryChange} className="my-3">
           <Dropdown.Toggle variant="success" id="dropdown-basic">
             Select Category
