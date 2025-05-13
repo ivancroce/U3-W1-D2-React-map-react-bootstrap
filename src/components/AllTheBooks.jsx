@@ -1,25 +1,74 @@
-import { Badge, Button, Card, Row, Col, Container, Image } from "react-bootstrap";
+import { Button, Card, Row, Col, Container, Dropdown } from "react-bootstrap";
 import scifi from "../data/scifi.json";
-/* import romance from "../data/romance.json";
+import romance from "../data/romance.json";
 import horror from "../data/horror.json";
 import history from "../data/history.json";
-import fantasy from "../data/fantasy.json"; */
+import fantasy from "../data/fantasy.json";
 import { Component } from "react";
 
 class AllTheBooks extends Component {
-  state = { selectedBook: null };
+  //default state
+  state = {
+    selectedCategory: "scifi",
+    books: scifi
+  };
+
+  // function to change category
+  handleCategoryChange = (category) => {
+    let books;
+
+    // switch case to select the books from that category
+    switch (category) {
+      case "romance":
+        books = romance;
+        break;
+      case "horror":
+        books = horror;
+        break;
+      case "history":
+        books = history;
+        break;
+      case "fantasy":
+        books = fantasy;
+        break;
+      default:
+        books = scifi;
+    }
+
+    // update the state
+    this.setState({
+      selectedCategory: category,
+      books: books
+    });
+  };
 
   render() {
-    console.log("Books", scifi);
+    const { books } = this.state; // books to show
+    console.log(books);
+
     return (
       <Container>
+        {/* category dropdown */}
+        <Dropdown onSelect={this.handleCategoryChange} className="my-3">
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            Select Category
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            <Dropdown.Item eventKey="scifi">Sci-Fi</Dropdown.Item>
+            <Dropdown.Item eventKey="romance">Romance</Dropdown.Item>
+            <Dropdown.Item eventKey="horror">Horror</Dropdown.Item>
+            <Dropdown.Item eventKey="history">History</Dropdown.Item>
+            <Dropdown.Item eventKey="fantasy">Fantasy</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+
+        {/* books */}
         <Row className="g-4 my-5">
-          {scifi.slice(0, 10).map((book, index) => (
+          {books.slice(0, 10).map((book, index) => (
             <Col key={`book-${index}`} xs={12} sm={6} md={3} className="text-center">
-              <Card className="mb-3 h-100">
-                <div className="">
-                  <Card.Img className="card-img-ratio" variant="top" src={book.img} alt={book.title} />
-                </div>
+              <Card className="mb-3 h-100 shadow">
+                <Card.Img className="card-img-ratio" variant="top" src={book.img} alt={book.title} />
                 <Card.Body>
                   <Card.Title>{book.title}</Card.Title>
                   <Card.Text>{book.price} €</Card.Text>

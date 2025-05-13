@@ -5,7 +5,7 @@ const Welcome = () => {
     <Container className="mt-5">
       <Row className="justify-content-center">
         <Col xs={10} md={6} className="text-center">
-          <Alert variant="success mb-0">
+          <Alert variant="success" className="mb-0 shadow">
             <Alert.Heading>Hey, nice to see you</Alert.Heading>
             <p>Welcome to React Bookstrap.</p>
             <hr />
